@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const catalogRoutes = require("./routes/catalog");
+const ordersRoutes = require("./routes/orders");
 const usersRoutes = require("./routes/users");
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(express.static(`${__dirname}/public`));
 app.use(cors(corsOptions));
 app.use(catalogRoutes);
 app.use(usersRoutes);
+app.use(ordersRoutes);
 
 const port = 3000;
 
