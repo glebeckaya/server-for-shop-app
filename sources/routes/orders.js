@@ -50,6 +50,7 @@ const Orders = mongoose.model("ordersCollection", schemeOrders, "ordersCollectio
 router.get("/orders", (req, res) => {
 	Orders.find({}, (err, data) => {
 		res.send(data);
+		if (err) console.log(err);
 	});
 });
 

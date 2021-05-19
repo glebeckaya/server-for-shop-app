@@ -16,8 +16,17 @@ const schemeProducts = new Schema({
 	price: {
 		type: Number
 	},
+	image: {
+		type: String
+	},
 	count: {
 		type: Number
+	},
+	rating: {
+		type: Number
+	},
+	stared: {
+		type: Boolean
 	}
 });
 
@@ -26,6 +35,7 @@ const Products = mongoose.model("shopCollection", schemeProducts, "shopCollectio
 router.get("/catalog", (req, res) => {
 	Products.find({}, (err, data) => {
 		res.send(data);
+		if (err) console.log(err);
 	});
 });
 
@@ -35,11 +45,15 @@ router.put("/catalog/:id", urlencodedParser, (req) => {
 	const productPrice = req.body.price;
 	const productImage = req.body.image;
 	const productCount = req.body.count;
+	const productRating = req.body.rating;
+	const productStared = req.body.stared;
 	Products.findById(_id).then((product) => {
 		product.name = productName;
 		product.price = productPrice;
 		product.image = productImage;
 		product.count = productCount;
+		product.rating = productRating;
+		product.stared = productStared;
 		product.save();
 	});
 });

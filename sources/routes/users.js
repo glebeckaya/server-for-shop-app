@@ -32,23 +32,7 @@ const Users = mongoose.model("usersCollection", schemeUsers, "usersCollection");
 router.get("/users", (req, res) => {
 	Users.find({}, (err, data) => {
 		res.send(data);
-	});
-});
-
-router.put("/users/:id", urlencodedParser, (req) => {
-	const _id = req.body._id;
-	const userName = req.body.name;
-	const userEmail = req.body.email;
-	const userPassword = req.body.password;
-	const userStared = req.body.stars;
-	const userBag = req.body.bag;
-	Users.findById(_id).then((user) => {
-		user.name = userName;
-		user.email = userEmail;
-		user.password = userPassword;
-		user.stars = userStared;
-		user.bag = userBag;
-		user.save();
+		if (err) console.log(err);
 	});
 });
 
